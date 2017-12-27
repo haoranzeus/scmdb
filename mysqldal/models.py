@@ -3,7 +3,7 @@
 synopsis: sqlalchemy models
 author: haoranzeus@gmail.com (zhanghaoran)
 """
-
+from datetime import datetime
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import DateTime
@@ -11,6 +11,8 @@ from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+
+from utils.str_tools import now_format
 
 
 Base = declarative_base()
@@ -102,7 +104,7 @@ class Vm(Base):
     cores = Column(Integer, doc='核数')
     ram = Column(Integer, doc='内存(M)')
     hdd = Column(Integer, doc='磁盘容量')
-    assigned_date = Column(DateTime, doc='分配时间')
+    assigned_date = Column(DateTime, default=datetime.now(), doc='分配时间')
     end_date = Column(DateTime, doc='到期时间')
     server_id = Column(
             Integer,

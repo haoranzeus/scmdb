@@ -1,11 +1,13 @@
 # coding=utf-8
 import sqlalchemy
+from datetime import datetime
 from nose.tools import assert_equal
 from nose.tools import assert_raises
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 
+import fixture
 from mysqldal.models import Idc
 from mysqldal.models import Rack
 from mysqldal.models import Server
@@ -141,9 +143,15 @@ class TestVm:
         self.server1 = Server(**SERVER1)
         self.server2 = Server(**SERVER2)
         self.vm1 = Vm(**VM1)
+        VM2['assigned_date'] = datetime.now()
         self.vm2 = Vm(**VM2)
 
     def teardown(self):
+        # with engine.connect() as con:
+        #     con.execute(text('delete from vm'))
+        #     con.execute(text('delete from server'))
+        #     con.execute(text('delete from rack'))
+        #     con.execute(text('delete from idc'))
         self.session.close()
 
     def test_vm(self):

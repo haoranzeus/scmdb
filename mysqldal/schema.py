@@ -1,0 +1,70 @@
+from marshmallow import Schema, fields
+
+
+class IdcSchema(Schema):
+    id = fields.Integer()
+    name = fields.Str(required=True)
+    address = fields.Str()
+    status = fields.Str()
+    contact = fields.Str()
+    telephone = fields.Str()
+    floor = fields.Str()
+    province = fields.Str()
+    city = fields.Str()
+    district = fields.Str()
+    operator = fields.Str()
+    stars = fields.Integer()
+    rack = fields.Nested('RackSchema', many=True)
+
+
+class RackSchema(Schema):
+    id = fields.Integer()
+    rackcode = fields.String(required=True)
+    floor = fields.String()
+    room = fields.String()
+    server = fields.Nested('ServerSchema', many=True)
+
+
+class ServerSchema(Schema):
+    id = fields.Integer()
+    name = fields.String()
+    brand = fields.String()
+    model_number = fields.String()
+    sn = fields.String()
+    status = fields.String()
+    form_factor = fields.String()
+    multi_thread = fields.String()
+    drivers_detail = fields.String()
+    console_ip = fields.String()
+    control_type = fields.String()
+    affliated_area = fields.String()
+    os = fields.String()
+    ipmi_user = fields.String()
+    kvm_ip = fields.String()
+    kvm_pwd = fields.String()
+    position = fields.String()
+    raid_cache_s = fields.String()
+    remark = fields.String()
+    processors = fields.Integer()
+    cores = fields.Integer()
+    logical_processor = fields.Integer()
+    vm = fields.Nested('VmSchema', many=True)
+
+
+class VmSchema(Schema):
+    id = fields.Integer()
+    name = fields.String(required=True)
+    os = fields.String()
+    inner_ip = fields.String()
+    pwd = fields.String()
+    use = fields.String()
+    contact = fields.String()
+    status = fields.String()
+    remarks = fields.String()
+    wk_no = fields.String()
+    server_type = fields.String()
+    cores = fields.Integer()
+    ram = fields.Integer()
+    hdd = fields.Integer()
+    assigned_date = fields.DateTime('iso')
+    end_date = fields.DateTime('iso')
