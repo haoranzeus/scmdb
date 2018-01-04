@@ -1,0 +1,33 @@
+# The configuration for cmdb_port
+# The configuration for syndata-core
+scmdb:
+  framwork: flask
+  url_root: /api/scmdb/v0_1_0
+  cmdb_database:
+    host: 'localhost'
+    database: 'scmdb'
+    user: 'root'
+    password: '123456'
+    charset: 'utf8'
+
+
+#     - framework: flask
+#     - app_id: scmdb
+#       url_root: /api/scmdb/v0_1_0 # Needn't end with a "/".
+#       cmdb_database: 
+#         host: 'localhost'
+#         database: 'scmdb'
+#         user: 'root'
+#         password: '123456'
+#         charset: 'utf8'
+#       nas_info:
+#         nas_download_url: 'http://172.23.31.171:9080'
+#         nas_path: '/data/omp/cmdb/'
+#       redis:
+#         host: 'localhost'
+#         port: '6379'
+#         db: 0
+#       encrypt:
+#         siv: 'd517dbe7e6aa620ad07316684a4f7049'
+#       microserver:
+#         rbac: 'http://172.23.31.171/RBAC/api/rbac/v0_1_0/'

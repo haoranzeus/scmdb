@@ -147,11 +147,11 @@ class TestVm:
         self.vm2 = Vm(**VM2)
 
     def teardown(self):
-        # with engine.connect() as con:
-        #     con.execute(text('delete from vm'))
-        #     con.execute(text('delete from server'))
-        #     con.execute(text('delete from rack'))
-        #     con.execute(text('delete from idc'))
+        with engine.connect() as con:
+            con.execute(text('delete from vm'))
+            con.execute(text('delete from server'))
+            con.execute(text('delete from rack'))
+            con.execute(text('delete from idc'))
         self.session.close()
 
     def test_vm(self):
