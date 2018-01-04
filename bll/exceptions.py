@@ -35,7 +35,7 @@ class UpdateParameterError(SelfDefinedException):
     """
     def __init__(self, message):
         super(UpdateParameterError, self).__init__(message)
-        self.code = self._code_client_prefix + "04"
+        self.code = self._code_client_prefix + "05"
 
 
 class DeleteParameterError(SelfDefinedException):

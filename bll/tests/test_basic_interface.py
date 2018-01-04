@@ -36,5 +36,31 @@ class TestApiIdcList:
         self.session.delete(self.idc1)
 
     def test1(self):
-        condiction_dict = {}
-        basic_interface.api_idc_list(condiction_dict)
+        condiction_dict = {
+            'auth': {},
+            'action': {
+                'index': 1,
+                'size': 1,
+                'query': {
+                    'precise': {
+                        'district': '上城区',
+                        'stars': 5
+                    },
+                    'fuzzy': {
+                        'name': '%红山%'
+                    }
+                },
+                'sorts': [
+                    {
+                        'sort_field': 'stars',
+                        'priority': 1
+                    },
+                    {
+                        'sort_field': 'id',
+                        'priority': 1
+                    }
+                ]
+            }
+        }
+        res = basic_interface.api_idc_list(condiction_dict)
+        print(res)

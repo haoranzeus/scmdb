@@ -7,6 +7,7 @@ import logging
 from flask import request
 
 from bll import basic_interface
+from bll.exceptions import QueryParameterError
 from bll.exceptions import InsertParameterError
 from flask_restful import Resource
 
@@ -27,6 +28,10 @@ def handle_exception(cls):
         try:
             res = func(se, *args, **kwargs)
         except InsertParameterError as e:
+            result['result']['code'] = e.code
+            result['result']['msg'] = e.message
+            return result
+        except QueryParameterError as e:
             result['result']['code'] = e.code
             result['result']['msg'] = e.message
             return result

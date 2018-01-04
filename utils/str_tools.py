@@ -26,3 +26,12 @@ def now_format(format_type):
         format_type - 字符串，可以是['mysql', ]
     """
     return datetime_format(datetime.now(), format_type)
+
+
+def str_add_quot(para):
+    """
+    如果是以字符串，两边加上引号
+    """
+    if isinstance(para, str):
+        para = '"' + para + '"'
+    return para
