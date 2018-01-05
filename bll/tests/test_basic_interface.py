@@ -1,3 +1,4 @@
+import copy
 import os
 import sys
 
@@ -64,3 +65,19 @@ class TestApiIdcList:
         }
         res = basic_interface.api_idc_list(condiction_dict)
         print(res)
+
+
+class TestApiIdcAdd:
+    def setup(self):
+        self.session = context.Session()
+
+    def test1(self):
+        idc_data1 = copy.deepcopy(fixture.IDC1)
+        idc_data2 = copy.deepcopy(fixture.IDC1)
+        idc_data1['name'] = '红山机房1'
+        idc_data2['name'] = '红山机房2'
+        condiction_dict = {
+            'auth': {},
+            'action': [idc_data1, idc_data2]
+        }
+        res = basic_interface.api_idc_add(condiction_dict)

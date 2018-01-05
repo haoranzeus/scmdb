@@ -3,6 +3,7 @@
 synopsis: sqlalchemy engine and session
 author: haoranzeus@gmail.com (zhanghaoran)
 """
+from contextlib import contextmanager
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -20,3 +21,16 @@ def sql_init():
     )
     context.engine = create_engine(sql_alchemy_para, echo=False)
     context.Session = sessionmaker(bind=context.engine)
+
+
+@contextmanager
+def session_scope():
+    session = context.Session()
+    try:
+        yield session
+        session.commit()
+    except:
+        session.rollback()
+        raise
+    finally:
+        session.close()
