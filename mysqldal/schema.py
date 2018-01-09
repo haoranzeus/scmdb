@@ -2,8 +2,8 @@ from marshmallow import Schema, fields
 
 
 class IdcSchema(Schema):
-    id = fields.Integer()
-    name = fields.Str(required=True)
+    id = fields.Integer(required=True)
+    name = fields.Str()
     address = fields.Str()
     status = fields.Str()
     contact = fields.Str()
@@ -18,15 +18,16 @@ class IdcSchema(Schema):
 
 
 class RackSchema(Schema):
-    id = fields.Integer()
-    rackcode = fields.String(required=True)
+    id = fields.Integer(required=True)
+    rackcode = fields.String()
     floor = fields.String()
     room = fields.String()
+    idc_id = fields.Integer()
     server = fields.Nested('ServerSchema', many=True)
 
 
 class ServerSchema(Schema):
-    id = fields.Integer()
+    id = fields.Integer(required=True)
     name = fields.String()
     brand = fields.String()
     model_number = fields.String()
@@ -48,12 +49,13 @@ class ServerSchema(Schema):
     processors = fields.Integer()
     cores = fields.Integer()
     logical_processor = fields.Integer()
+    rack_id = fields.Integer()
     vm = fields.Nested('VmSchema', many=True)
 
 
 class VmSchema(Schema):
-    id = fields.Integer()
-    name = fields.String(required=True)
+    id = fields.Integer(required=True)
+    name = fields.String()
     os = fields.String()
     inner_ip = fields.String()
     pwd = fields.String()
@@ -68,3 +70,4 @@ class VmSchema(Schema):
     hdd = fields.Integer()
     assigned_date = fields.DateTime('iso')
     end_date = fields.DateTime('iso')
+    server_id = fields.Integer()

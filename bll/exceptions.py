@@ -11,6 +11,15 @@ class SelfDefinedException(Exception):
 
 
 # 客户端错误类
+class ParameterError(SelfDefinedException):
+    """
+    参数错误
+    """
+    def __init__(self, message):
+        super(ParameterError, self).__init__(message)
+        self.code = self._code_client_prefix + "00"
+
+
 class QueryParameterError(SelfDefinedException):
     """
     查询参数错误

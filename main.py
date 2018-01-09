@@ -10,11 +10,6 @@ import os
 import sys
 import yaml
 
-from mysqldal.sql_engine import sql_init
-from RESTFul_flask.app import app
-from RESTFul_flask.app import app_init
-from utils.context import Context
-
 
 def usage():
     print('some usage information')
@@ -62,11 +57,19 @@ def main(argv):
         logging.config.dictConfig(log_conf_dict)
     with codecs.open(api_conf, 'r', 'utf-8') as conff:
         app_conf.update(yaml.load(conff))
+    _log = logging.getLogger(__name__)
+
+    # 等logging配置好了再导入
+    from mysqldal.sql_engine import sql_init
+    from RESTFul_flask.app import app
+    from RESTFul_flask.app import app_init
+    from utils.context import Context
 
     context = Context()
     context.init(app_conf)
     app_init()
     sql_init()
+    _log.debug('start from main.py')
     app.run(host="0.0.0.0", debug=True)
 
 

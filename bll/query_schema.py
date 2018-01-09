@@ -8,6 +8,11 @@ from marshmallow import Schema, fields, validates
 from .exceptions import QueryParameterError
 
 
+class BaseParameterSchema(Schema):
+    auth = fields.Dict(required=True)
+    action = fields.Field(required=True)
+
+
 class NestedQuerySchema(Schema):
     precise = fields.Dict()
     fuzzy = fields.Dict()
@@ -25,7 +30,19 @@ class NestedSortSchema(Schema):
 
 
 class PageQueryBaseSchema(Schema):
+    """
+    分页列表的查询参数schema
+    """
     index = fields.Integer()
     size = fields.Integer()
     sorts = fields.Nested('NestedSortSchema', many=True)
     query = fields.Nested('NestedQuerySchema')
+
+
+class NormalVerify:
+    @staticmethod
+    def intlist(p_list):
+        for i in p_list:
+            if not isinstance(i, int):
+                return False
+        return True
